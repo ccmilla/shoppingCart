@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a menu with 4 categories, appetizers, main, dessert, and beverages.  This shows flex grids for the categories and an additional cart in which you can add and subtract items from the menu.
 
 ## Available Scripts
 
