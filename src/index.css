@@ -171,7 +171,20 @@ button {
     font-size: 0.8rem;
     cursor: pointer;
 }
-
+button.add {
+  background-color: #40c0f0;
+  width: 1.5rem;
+}
+button.remote{
+  background-color: #f04040;
+  width: 1.5rem;
+}
+button.badge {
+  background-color: #404040;
+  border: none;
+  color: #fff;
+  width: 1.5rem;
+}
 button:focus, 
 button:hover {
   color: white;
@@ -235,4 +248,7 @@ img.small{
 }
 .row.center{
   align-items: center;
+}
+.text-right {
+  text-align: right;
 }

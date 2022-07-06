@@ -6,7 +6,7 @@ import Dessert from './Components/Dessert';
 import Beverage from './Components/Beverage';
 
 export default function Content(props) {
-    const {appetizers, onAdd} = props; 
+    const {appetizers, addApp} = props; 
     const {meals} = props;  
     const {desserts} = props;
     const {beverages} = props;
@@ -18,7 +18,7 @@ export default function Content(props) {
             <div className="flex-child">
                 <h4>Appetizers</h4>
                 {appetizers.map((appetizer) => (
-                    <Appetizer key={appetizer.id} appetizer={appetizer} onAdd={onAdd}></Appetizer>
+                    <Appetizer key={appetizer.id} appetizer={appetizer} addApp={addApp}></Appetizer>
                 ))}
             </div>
             <div className="flex-child">
