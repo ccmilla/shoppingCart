@@ -12,17 +12,61 @@ function App() {
   const {meals} = data;
   const {desserts} = data;
   const {beverages} = data;
+  const {products} = {...appetizers, ...meals, ...desserts, ...beverages};
   const [cartItems, setCartItems] = useState([]);
-  const addApp = (appetizer) => {
-    const exist = cartItems.find(x => x.id === appetizer.id);
+  
+  /* adding items from each category because of block*/
+  const onAdd = (product) => {
+    const exist = cartItems.find(x => x.id === product.id);
     if(exist){
       setCartItems(
         cartItems.map(x => 
-          x.id === appetizer.id ? {...exist, qty: exist.qty + 1}: x))
+          x.id === product.id ? {...exist, qty: exist.qty + 1}: x))
     }else{
-      setCartItems([...cartItems, {...appetizer, qty: 1}])
+      setCartItems([...cartItems, {...product, qty: 1}])
     }
   }
+  const addMeal = (meal) => {
+    const exist = cartItems.find(x => x.id === meal.id);
+    if(exist){
+      setCartItems(
+        cartItems.map(x => 
+          x.id === meal.id ? {...exist, qty: exist.qty + 1}: x))
+    }else{
+      setCartItems([...cartItems, {...meal, qty: 1}])
+    }
+  }
+  const addDessert = (dessert) => {
+    const exist = cartItems.find(x => x.id === dessert.id);
+    if(exist){
+      setCartItems(
+        cartItems.map(x => 
+          x.id === dessert.id ? {...exist, qty: exist.qty + 1}: x))
+    }else{
+      setCartItems([...cartItems, {...dessert, qty: 1}])
+    }
+  }
+  const addBeverage = (beverage) => {
+    const exist = cartItems.find(x => x.id === beverage.id);
+    if(exist){
+      setCartItems(
+        cartItems.map(x => 
+          x.id === beverage.id ? {...exist, qty: exist.qty + 1}: x))
+    }else{
+      setCartItems([...cartItems, {...beverage, qty: 1}])
+    }
+  }
+  const onRemove = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if(exist.qty === 1){
+      setCartItems(cartItems.filter((x) => x.id !== product.id));
+    }else{
+      setCartItems(
+        cartItems.map(x => 
+          x.id === product.id ? {...exist, qty: exist.qty - 1}: x))
+    }
+  };
+  
   const [search, setSearch] = useState('');
   const [items, setItems] = useState(JSON.parse(localStorage.getItem('myCart')) || []);
   const [newItem, setNewItem] = useState('');
@@ -61,15 +105,19 @@ function App() {
     <div className="App">
       <Header title="JoJo's Diner"/>
       <Content 
-        appetizers={appetizers} 
+        appetizers={appetizers}
+        onAdd={onAdd} 
         meals={meals} 
-        desserts={desserts} 
+        addMeal={addMeal}
+        desserts={desserts}
+        addDessert={addDessert}
         beverages={beverages}
-        addApp={addApp}>
+        addBeverage={addBeverage}>
       </Content>
       <Basket 
         cartItems={cartItems} 
-        addApp={addApp}>
+        onAdd={onAdd}
+        onRemove={onRemove}>
       </Basket>
       <Search
         search={search}
@@ -79,4 +127,4 @@ function App() {
   );
 }
 
-export default App;
+export default App

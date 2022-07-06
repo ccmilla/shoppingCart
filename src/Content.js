@@ -1,16 +1,14 @@
-//import AddItem from './Components/AddItem';
-//import { useState} from 'react';
 import Appetizer from './Components/Appetizer';
 import Meal from './Components/Meal';
 import Dessert from './Components/Dessert';
 import Beverage from './Components/Beverage';
 
 export default function Content(props) {
-    const {appetizers, addApp} = props; 
-    const {meals} = props;  
-    const {desserts} = props;
-    const {beverages} = props;
-    //const [openModal, setOpenModal] = useState(false);
+    const {appetizers, onAdd } = props; 
+    const {meals, addMeal} = props;  
+    const {desserts, addDessert} = props;
+    const {beverages, addBeverage} = props;
+   
     return(
       <main>
         <div className="flex-container">
@@ -18,25 +16,25 @@ export default function Content(props) {
             <div className="flex-child">
                 <h4>Appetizers</h4>
                 {appetizers.map((appetizer) => (
-                    <Appetizer key={appetizer.id} appetizer={appetizer} addApp={addApp}></Appetizer>
+                    <Appetizer key={appetizer.id} appetizer={appetizer} onAdd={onAdd} ></Appetizer>
                 ))}
             </div>
             <div className="flex-child">
                 <h4>Main Course</h4>
                 {meals.map((meal) => (
-                    <Meal key={meal.id} meal={meal}></Meal>
+                    <Meal key={meal.id} meal={meal} addMeal={addMeal}></Meal>
                 ))}
             </div>
             <div className="flex-child">
                 <h4>Desserts</h4>
                 {desserts.map((dessert) => (
-                    <Dessert key={dessert.id} dessert={dessert}></Dessert>
+                    <Dessert key={dessert.id} dessert={dessert} addDessert={addDessert}></Dessert>
                 ))}
             </div>
             <div className="flex-child">
                 <h4>Beverages</h4>
                 {beverages.map((beverage) => (
-                    <Beverage key={beverage.id} beverage={beverage}></Beverage>
+                    <Beverage key={beverage.id} beverage={beverage} addBeverage={addBeverage}></Beverage>
                 ))}
             </div>
         </div>

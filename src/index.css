@@ -175,7 +175,7 @@ button.add {
   background-color: #40c0f0;
   width: 1.5rem;
 }
-button.remote{
+button.remove{
   background-color: #f04040;
   width: 1.5rem;
 }
@@ -245,6 +245,7 @@ img.small{
   padding: 1rem;
   margin: 00.5rem;
   border-radius: 0.5rem;
+  width:100%;
 }
 .row.center{
   align-items: center;
