@@ -1,88 +1,130 @@
-import { FaPlus } from 'react-icons/fa';
+//import AddItem from './Components/AddItem';
+//import { useState} from 'react';
+import Appetizer from './Components/Appetizer';
+import Meal from './Components/Meal';
+import Dessert from './Components/Dessert';
+import Beverage from './Components/Beverage';
 
-const Content = ({ newItem, setNewItem, handleSubmit}) => {
-    const handleClick = (item) => {
-        setNewItem(item);
-        item={newItem}
-    }
+export default function Content(props) {
+    const {appetizers, onAdd} = props; 
+    const {meals} = props;  
+    const {desserts} = props;
+    const {beverages} = props;
+    //const [openModal, setOpenModal] = useState(false);
+    return(
+      <main>
+        <div className="flex-container">
+            <h2>Menu</h2>
+            <div className="flex-child">
+                <h4>Appetizers</h4>
+                {appetizers.map((appetizer) => (
+                    <Appetizer key={appetizer.id} appetizer={appetizer} onAdd={onAdd}></Appetizer>
+                ))}
+            </div>
+            <div className="flex-child">
+                <h4>Main Course</h4>
+                {meals.map((meal) => (
+                    <Meal key={meal.id} meal={meal}></Meal>
+                ))}
+            </div>
+            <div className="flex-child">
+                <h4>Desserts</h4>
+                {desserts.map((dessert) => (
+                    <Dessert key={dessert.id} dessert={dessert}></Dessert>
+                ))}
+            </div>
+            <div className="flex-child">
+                <h4>Beverages</h4>
+                {beverages.map((beverage) => (
+                    <Beverage key={beverage.id} beverage={beverage}></Beverage>
+                ))}
+            </div>
+        </div>
+      </main>
+    )
+/*    const [quantity, setQuantity] = useState(0);
+
+    function handleAdd(){
+        setNewItem(addItemToCart);
+        {handleSubmit}
+    
     return (
             <main>
-            <form onSubmit={handleSubmit}>
-            <div class="flex-container">
+                <div class="flex-container">
                 <div className="flex-child">
-                    <p>Appetizers</p>
-                    <p>
-                     <img src="/wings.jpg" alt="wings" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('wings')}><FaPlus/> Add Wings</button>
-                    </p>
+                    <p><b>Appetizers</b></p>
+                        <p>
+                        <img src="/wings.jpg" alt="wings" width="40" height="40"></img>Wings $14</p>
+                        <button onClick={() => setOpenModal(true)}> Add to cart </button>
+                        {openModal && 
+                        <AddItem closeModal={setOpenModal}/>}
                     <p>
                      <img src="/nachos.jpg" alt="nachos" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('nachos')}><FaPlus/> Add Nachos</button>
+                     <p>Nachos</p>
                     </p>
                     <p>
                      <img src="/skewers.jpg" alt="skewers" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('skewers')}><FaPlus/> Add Skewers</button>
+                     <p>Skewers</p>
                     </p>
                 </div>
                 <div className="flex-child">
-                    <p>Main</p>
+                    <p><b>Main</b></p>
                     <p>
                      <img src="/salad.jpg" alt="salad" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('salad')}><FaPlus/> Add Salad</button>
+                     <p>Salad</p>
                     </p>
                     <p>
-                     <img src="/burgers.jpg" alt="burgers" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('burgers')}><FaPlus/> Add Burger</button>
+                     <img src="/burgers.jpg" alt="burgers" width="40" height="40"></img>  
+                     <p>Burgers</p>
                     </p>
                     <p>
-                     <img src="/pizza.jpg" alt="pizza" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('pizza')}><FaPlus/> Add Pizza</button>
+                     <img src="/pizza.jpg" alt="pizza" width="40" height="40"></img> 
+                     <p>Pizza</p>
                     </p>
                     <p>
                      <img src="/pasta.jpg" alt="pasta" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('pasta')}><FaPlus/> Add Pasta</button>
+                     <p>Pasta</p>
                     </p>
                 </div>
                 <div className="flex-child">
-                    <p>Desserts</p>
+                    <p><b>Desserts</b></p>
                     <p>
                      <img src="/flan.jpg" alt="flan" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('flan')}><FaPlus/> Add Flan</button>
+                     <p>Flan</p>
                     </p>
                     <p>
                      <img src="/cake.jpg" alt="cake" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('cake')}><FaPlus/> Add Cake</button>
+                     <p>Cake</p>
                     </p>
                     <p>
                      <img src="/donuts.jpg" alt="donuts" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('donuts')}><FaPlus/> Add Donuts</button>
+                     <p>Donuts</p>
                     </p>
                 </div>
             </div>
             <div class="flex-container">
                 <div className="flex-child">
-                    <p>Beverages</p>
+                    <p><b>Beverages</b></p>
                     <p>
                      <img src="/soda.jpg" alt="soda" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('soda')}><FaPlus/> Add Soda</button>
+                     <p>Soda</p>
                     </p>
                     <p>
                      <img src="/juice.jpg" alt="juice" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('juice')}><FaPlus/> Add Juice</button>
+                     <p>Juice</p>
                     </p>
                     <p>
                      <img src="/coffee.jpg" alt="coffee" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('coffee')}><FaPlus/> Add Coffee</button>
+                     <p>Coffee</p>
                     </p>
                     <p>
                      <img src="/beer.jpg" alt="beer" width="40" height="40"></img>
-                     <button type="submit" onClick={handleClick('beer')}><FaPlus/> Add Beer</button>
+                     <p>Beer</p>
                     </p>
                 </div>  
             </div>
-          </form>
         </main> 
     )
 }
-
-export default Content
+*/
+}
