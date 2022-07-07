@@ -1,12 +1,15 @@
 import React from 'react';
+import { useState } from 'react';
 
 export default function Basket(props) {
   const {cartItems, onAdd, onRemove} = props;
-  const itemsPrice = cartItems.reduce((a,c) => a+ c.price * c.qty, 0);
+  const itemsPrice = cartItems.reduce((a,c) => a + c.price * c.qty, 0);
+  const [tip, setTipAmount] = useState(0);
   const tax = itemsPrice * 0.08;
-  let tip = 0;
-  const total = itemsPrice + tax + tip;
-  return (
+  const subTotal = itemsPrice + tax;
+  const total = subTotal + tip;
+  
+return (
      <aside className='block col-1'>
         <h2>Cart Items</h2>
         <div>{cartItems.length === 0 && <div>Cart is Empty</div>}</div>
@@ -26,7 +29,7 @@ export default function Basket(props) {
             <>
             <hr></hr>
             <div className="row">
-                <div className='"col-2'>Item Price</div>
+                <div className='"col-2'>Subtotal</div>
                 <div className='"col-1 text-right'>${itemsPrice.toFixed(2)}</div>
             </div>
             <div className="row">
@@ -35,11 +38,15 @@ export default function Basket(props) {
             </div>
             <div className="row">
                 <div className='"col-2'>Tip</div>
+                <button className='tipBtn' onClick={() => setTipAmount(.1*itemsPrice)}>10%</button>
+                <button className='tipBtn' onClick={() => setTipAmount(.15*itemsPrice)}>15%</button>
+                <button className='tipBtn' onClick={() => setTipAmount(.2*itemsPrice)}>20%</button>
+                <button className='tipBtn' onClick={() => setTipAmount(0)}>Clear</button>
                 <div className='"col-1 text-right'>${tip.toFixed(2)}</div>
             </div>
             <div className="row">
                 <div className='"col-2'><b>Total</b></div>
-                <div className='"col-1 text-right'>${total.toFixed(2)}</div>
+                <div className='"col-1 text-right'><b>${total.toFixed(2)}</b></div>
             </div>
             <hr/>
             <div className ="row">

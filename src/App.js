@@ -6,16 +6,24 @@ import data from './data';
 import Search from './Search';
 import Basket from './Components/Basket';
 import { useState, useEffect} from 'react';
-
+/**
+ * The main section of the whole menu.  Each category is divided into grids with buttons to
+ * add items from the menu.  The basket is what is currently in the order where the quantity,
+ * price, tip, tax, and quantity times price is displayed.
+ * @returns 
+ */
 function App() {
   const {appetizers} = data;
   const {meals} = data;
   const {desserts} = data;
   const {beverages} = data;
-  const {products} = {...appetizers, ...meals, ...desserts, ...beverages};
+  //const {products} = {...appetizers, ...meals, ...desserts, ...beverages};
   const [cartItems, setCartItems] = useState([]);
+  const [search, setSearch] = useState('');
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem('myCart')) || []);
+  //const [newItem, setNewItem] = useState('');
   
-  /* adding items from each category because of block*/
+  /* adding items to basket from each category because of block onAdd is for adding appetizers*/
   const onAdd = (product) => {
     const exist = cartItems.find(x => x.id === product.id);
     if(exist){
@@ -56,6 +64,7 @@ function App() {
       setCartItems([...cartItems, {...beverage, qty: 1}])
     }
   }
+  // No need to remove items per category now that we are just looking at items in the cart
   const onRemove = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if(exist.qty === 1){
@@ -66,11 +75,6 @@ function App() {
           x.id === product.id ? {...exist, qty: exist.qty - 1}: x))
     }
   };
-  
-  const [search, setSearch] = useState('');
-  const [items, setItems] = useState(JSON.parse(localStorage.getItem('myCart')) || []);
-  const [newItem, setNewItem] = useState('');
-
   useEffect(() => {
     localStorage.setItem('myCart', JSON.stringify(items));
   }, [items])
@@ -81,6 +85,7 @@ function App() {
     const listItems = [...items, myNewItem];
     setItems(listItems);
   }
+  /* old code
   // Allows user to click on this item to delete later.
   const handleCheck = (id) => {
     const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
@@ -99,7 +104,7 @@ function App() {
     addItem(newItem);
     setNewItem('');
   }
-
+*/
   return (
     /* Main View */
     <div className="App">
@@ -117,7 +122,8 @@ function App() {
       <Basket 
         cartItems={cartItems} 
         onAdd={onAdd}
-        onRemove={onRemove}>
+        onRemove={onRemove} 
+        >
       </Basket>
       <Search
         search={search}

@@ -253,3 +253,10 @@ img.small{
 .text-right {
   text-align: right;
 }
+
+.tipBtn{
+  color: #fff;
+  width:10%;
+  background-color: #007bff;
+  border-color: #fff;
+}
